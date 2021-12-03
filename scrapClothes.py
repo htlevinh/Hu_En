@@ -1,14 +1,13 @@
 from bs4 import BeautifulSoup
 import requests
 import csv
-import os
 import pandas as pd
 
 
-# variables:
+## variables:
 urlmain= "https://www.50languages.com/vocab/learn/en/hu/16/"
 
-#Codes:
+## Codes:
 var = 1
 while var > 0:
     html_text = requests.get(urlmain).text
@@ -36,20 +35,23 @@ while var > 0:
     else:
         for webdatum in webdata:
             link= "https://www.50languages.com/vocab/" + webdatum.get('src')
+            print(link)
             pics_array.append(link)
             name = webdatum.get('src').replace("images/","")
             file_array.append(name)
-            with open(name, 'wb') as f:
-                im = requests.get(link)
-                f.write(im.content)
-                print("writing: " + name)
+            ## The following codes are for downloading file ##
+            #with open(name, 'wb') as f:
+             #   im = requests.get(link)
+              #  f.write(im.content)
+               # print("writing: " + name)
             
                  
     data = {'Hungarian':hu_array,
             'English':eng_array,
-            'Photos':file_array,
+            #'Photos':file_array,
+            'Links':pics_array,
         }
-    df = pd. DataFrame(data,columns=['Hungarian', 'English', 'Photos'])
+    df = pd. DataFrame(data,columns=['Hungarian', 'English', 'Links'])
     print(df.head())
     with open('new_vocab.csv','w') as result_file:
         wr = csv.writer(result_file, dialect='excel')

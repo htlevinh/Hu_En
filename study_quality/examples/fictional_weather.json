@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "topic_id": "fictional-weather-instruments",
+  "questions": [
+    {
+      "id": "DEMO-001",
+      "stem": "Which instrument measures atmospheric pressure?",
+      "options": [
+        {"label": "A", "text": "Barometer", "taught_by": ["c-pressure"]},
+        {"label": "B", "text": "Thermometer", "taught_by": ["c-temperature"]},
+        {"label": "C", "text": "Anemometer", "taught_by": ["c-wind"]}
+      ],
+      "answer_labels": ["A"]
+    }
+  ],
+  "lesson": {
+    "blocks": [
+      {"id": "b-pressure", "text": "Atmospheric pressure is measured using a barometer. A barometer responds to pressure differences instead of measuring temperature or wind speed."},
+      {"id": "b-other", "text": "A thermometer measures temperature rather than atmospheric pressure. An anemometer measures wind speed, not atmospheric pressure."}
+    ],
+    "claims": [
+      {"id": "c-pressure", "block_id": "b-pressure", "stance": "true", "decision": "A barometer measures atmospheric pressure.", "why": "It changes with air pressure and does not directly measure temperature or wind speed.", "anchor": "Atmospheric pressure is measured using a barometer."},
+      {"id": "c-temperature", "block_id": "b-other", "stance": "false", "decision": "A thermometer does not measure atmospheric pressure.", "why": "Its measured quantity is temperature, which is different from pressure.", "anchor": "A thermometer measures temperature rather than atmospheric pressure."},
+      {"id": "c-wind", "block_id": "b-other", "stance": "false", "decision": "An anemometer does not measure atmospheric pressure.", "why": "It measures wind speed, a different physical quantity from atmospheric pressure.", "anchor": "An anemometer measures wind speed, not atmospheric pressure."}
+    ]
+  },
+  "phases": {"pretest_question_ids": ["DEMO-001"], "exam_question_ids": ["DEMO-001"]}
+}

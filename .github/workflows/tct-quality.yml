@@ -1,0 +1,27 @@
+name: TCT quality gate tests
+
+on:
+  pull_request:
+    paths:
+      - 'study_quality/**'
+      - '.github/workflows/tct-quality.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'study_quality/**'
+      - '.github/workflows/tct-quality.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify Python standard-library implementation
+        run: python3 -m unittest discover -s study_quality/tests -v
+      - name: Check synthetic topic bundle
+        run: python3 study_quality/tct_audit.py study_quality/examples/fictional_weather.json
